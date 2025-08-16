@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" th:replace="~{layout :: layout(~{::title}, ~{::main})}">
+<head>
+    <title>Quiz Result - Quiz App</title>
+</head>
+<body>
+    <main>
+        <div class="row justify-content-center">
+            <div class="col-lg-8">
+                <div class="card">
+                    <div class="card-header text-center">
+                        <h3><i class="fas fa-trophy me-2"></i>Quiz Completed!</h3>
+                    </div>
+                    <div class="card-body text-center">
+                        <h4 th:text="${result.quiz.title}">Quiz Title</h4>
+                        
+                        <div class="row mt-4">
+                            <div class="col-md-4">
+                                <div class="card bg-primary text-white">
+                                    <div class="card-body">
+                                        <h5>Your Score</h5>
+                                        <h2 th:text="${result.score} + '/' + ${result.totalQuestions}">8/10</h2>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="card bg-success text-white">
+                                    <div class="card-body">
+                                        <h5>Percentage</h5>
+                                        <h2 th:text="${#numbers.formatDecimal(result.percentage, 1, 1)} + '%'">80.0%</h2>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="card bg-info text-white">
+                                    <div class="card-body">
+                                        <h5>Grade</h5>
+                                        <h2 th:text="${result.percentage >= 90} ? 'A' : ${result.percentage >= 80} ? 'B' : ${result.percentage >= 70} ? 'C' : ${result.percentage >= 60} ? 'D' : 'F'">B</h2>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="alert alert-info mt-4">
+                            <i class="fas fa-envelope me-2"></i>
+                            Your results have been sent to your email address.
+                        </div>
+                        
+                        <div class="mt-4">
+                            <a href="/dashboard" class="btn btn-primary me-2">
+                                <i class="fas fa-home me-1"></i>Back to Dashboard
+                            </a>
+                            <a href="/results" class="btn btn-secondary">
+                                <i class="fas fa-chart-bar me-1"></i>View All Results
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Detailed Results -->
+                <div class="card mt-4">
+                    <div class="card-header">
+                        <h5><i class="fas fa-list me-2"></i>Detailed Results</h5>
+                    </div>
+                    <div class="card-body">
+                        <div th:each="question, iterStat : ${questions}" class="mb-3">
+                            <div class="card">
+                                <div class="card-body">
+                                    <h6>Question <span th:text="${iterStat.count}">1</span></h6>
+                                    <p th:text="${question.questionText}">Question text</p>
+                                    
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <strong>Your Answer:</strong>
+                                            <span th:text="${userAnswers[iterStat.index]}" 
+                                                  th:class="${userAnswers[iterStat.index] == question.correctOption} ? 'text-success' : 'text-danger'">A</span>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <strong>Correct Answer:</strong>
+                                            <span th:text="${question.correctOption}" class="text-success">B</span>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="mt-2">
+                                        <span th:if="${userAnswers[iterStat.index] == question.correctOption}" 
+                                              class="badge bg-success">
+                                            <i class="fas fa-check"></i> Correct
+                                        </span>
+                                        <span th:if="${userAnswers[iterStat.index] != question.correctOption}" 
+                                              class="badge bg-danger">
+                                            <i class="fas fa-times"></i> Incorrect
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+</body>
+</html>

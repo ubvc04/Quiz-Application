@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" th:replace="~{layout :: layout(~{::title}, ~{::main})}">
+<head>
+    <title>Welcome - Quiz App</title>
+</head>
+<body>
+    <main>
+        <div class="row justify-content-center">
+            <div class="col-lg-8">
+                <div class="text-center mb-5">
+                    <h1 class="display-4 text-primary">
+                        <i class="fas fa-graduation-cap me-3"></i>Welcome to Quiz App
+                    </h1>
+                    <p class="lead">Test your knowledge with our interactive quizzes</p>
+                </div>
+
+                <div class="row g-4">
+                    <div class="col-md-6">
+                        <div class="card h-100">
+                            <div class="card-body text-center">
+                                <i class="fas fa-user-plus fa-3x text-success mb-3"></i>
+                                <h5 class="card-title">New User?</h5>
+                                <p class="card-text">Create an account to start taking quizzes and track your progress.</p>
+                                <a href="/signup" class="btn btn-success">Sign Up</a>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="col-md-6">
+                        <div class="card h-100">
+                            <div class="card-body text-center">
+                                <i class="fas fa-sign-in-alt fa-3x text-primary mb-3"></i>
+                                <h5 class="card-title">Existing User?</h5>
+                                <p class="card-text">Login to access your dashboard and continue your learning journey.</p>
+                                <a href="/login" class="btn btn-primary">Login</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row mt-5">
+                    <div class="col-12">
+                        <div class="card">
+                            <div class="card-body">
+                                <h5 class="card-title">
+                                    <i class="fas fa-info-circle me-2"></i>Features
+                                </h5>
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <ul class="list-unstyled">
+                                            <li><i class="fas fa-check text-success me-2"></i>Multiple Choice Questions</li>
+                                            <li><i class="fas fa-check text-success me-2"></i>Instant Results</li>
+                                        </ul>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <ul class="list-unstyled">
+                                            <li><i class="fas fa-check text-success me-2"></i>Progress Tracking</li>
+                                            <li><i class="fas fa-check text-success me-2"></i>Email Notifications</li>
+                                        </ul>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <ul class="list-unstyled">
+                                            <li><i class="fas fa-check text-success me-2"></i>Secure Authentication</li>
+                                            <li><i class="fas fa-check text-success me-2"></i>Admin Dashboard</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+</body>
+</html>

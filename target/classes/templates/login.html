@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" th:replace="~{layout :: layout(~{::title}, ~{::main})}">
+<head>
+    <title>Login - Quiz App</title>
+</head>
+<body>
+    <main>
+        <div class="row justify-content-center">
+            <div class="col-md-6 col-lg-4">
+                <div class="card">
+                    <div class="card-header text-center">
+                        <h4><i class="fas fa-sign-in-alt me-2"></i>Login</h4>
+                    </div>
+                    <div class="card-body">
+                        <div th:if="${param.registered}" class="alert alert-success">
+                            Registration successful! Please login.
+                        </div>
+                        
+                        <div th:if="${error}" class="alert alert-danger" th:text="${error}">
+                            Invalid credentials
+                        </div>
+
+                        <form th:action="@{/login}" method="post">
+                            <div class="mb-3">
+                                <label for="username" class="form-label">Email</label>
+                                <input type="email" class="form-control" id="username" name="username" required>
+                            </div>
+                            
+                            <div class="mb-3">
+                                <label for="password" class="form-label">Password</label>
+                                <input type="password" class="form-control" id="password" name="password" required>
+                            </div>
+                            
+                            <div class="d-grid">
+                                <button type="submit" class="btn btn-primary">
+                                    <i class="fas fa-sign-in-alt me-2"></i>Login
+                                </button>
+                            </div>
+                        </form>
+                        
+                        <div class="text-center mt-3">
+                            <p>Don't have an account? <a href="/signup">Sign up here</a></p>
+                        </div>
+                        
+                        <div class="text-center mt-3">
+                            <small class="text-muted">
+                                <strong>Admin Login:</strong> admin@quizapp.com / admin123
+                            </small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+</body>
+</html>

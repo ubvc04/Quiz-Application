@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" th:replace="~{layout :: layout(~{::title}, ~{::main})}">
+<head>
+    <title th:text="'Take Quiz: ' + ${quiz.title}">Take Quiz</title>
+</head>
+<body>
+    <main>
+        <div class="row justify-content-center">
+            <div class="col-lg-8">
+                <div class="card">
+                    <div class="card-header">
+                        <h3 th:text="${quiz.title}">Quiz Title</h3>
+                        <p class="mb-0" th:text="${quiz.description}">Quiz description</p>
+                    </div>
+                    <div class="card-body">
+                        <form th:action="@{/quiz/{id}/submit(id=${quiz.id})}" method="post" id="quizForm">
+                            <div th:each="question, iterStat : ${questions}" class="mb-4">
+                                <div class="card">
+                                    <div class="card-body">
+                                        <h6 class="card-title">
+                                            Question <span th:text="${iterStat.count}">1</span> of <span th:text="${#lists.size(questions)}">10</span>
+                                        </h6>
+                                        <p class="card-text" th:text="${question.questionText}">Question text</p>
+                                        
+                                        <div class="form-check mb-2">
+                                            <input class="form-check-input" type="radio" 
+                                                   th:name="'answers[' + ${iterStat.index} + ']'" 
+                                                   th:id="'q' + ${iterStat.index} + 'a'" 
+                                                   value="A" required>
+                                            <label class="form-check-label" th:for="'q' + ${iterStat.index} + 'a'">
+                                                A) <span th:text="${question.optionA}">Option A</span>
+                                            </label>
+                                        </div>
+                                        
+                                        <div class="form-check mb-2">
+                                            <input class="form-check-input" type="radio" 
+                                                   th:name="'answers[' + ${iterStat.index} + ']'" 
+                                                   th:id="'q' + ${iterStat.index} + 'b'" 
+                                                   value="B" required>
+                                            <label class="form-check-label" th:for="'q' + ${iterStat.index} + 'b'">
+                                                B) <span th:text="${question.optionB}">Option B</span>
+                                            </label>
+                                        </div>
+                                        
+                                        <div class="form-check mb-2">
+                                            <input class="form-check-input" type="radio" 
+                                                   th:name="'answers[' + ${iterStat.index} + ']'" 
+                                                   th:id="'q' + ${iterStat.index} + 'c'" 
+                                                   value="C" required>
+                                            <label class="form-check-label" th:for="'q' + ${iterStat.index} + 'c'">
+                                                C) <span th:text="${question.optionC}">Option C</span>
+                                            </label>
+                                        </div>
+                                        
+                                        <div class="form-check mb-2">
+                                            <input class="form-check-input" type="radio" 
+                                                   th:name="'answers[' + ${iterStat.index} + ']'" 
+                                                   th:id="'q' + ${iterStat.index} + 'd'" 
+                                                   value="D" required>
+                                            <label class="form-check-label" th:for="'q' + ${iterStat.index} + 'd'">
+                                                D) <span th:text="${question.optionD}">Option D</span>
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="text-center">
+                                <button type="submit" class="btn btn-success btn-lg" onclick="return confirm('Are you sure you want to submit your answers?')">
+                                    <i class="fas fa-paper-plane me-2"></i>Submit Quiz
+                                </button>
+                                <a href="/dashboard" class="btn btn-secondary btn-lg ms-2">
+                                    <i class="fas fa-times me-2"></i>Cancel
+                                </a>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+</body>
+</html>
